@@ -16,66 +16,61 @@
             overflow: hidden;
         }
 
-        /* Heart Styles */
-        .heart {
+        h1 {
+            color: #a83279;
+        }
+
+        p {
+            margin-bottom: 20px;
+        }
+
+        /* Emoji Styles */
+        .emoji {
             position: absolute;
-            width: 30px;
-            height: 30px;
-            background: pink;
-            transform: rotate(-45deg);
-            animation: float 1s ease-out forwards;
+            font-size: 30px;
+            animation: floatEmoji 1.5s ease-out forwards;
             z-index: 9999;
+            pointer-events: none;
         }
 
-        .heart::before,
-        .heart::after {
-            content: "";
-            position: absolute;
-            width: 30px;
-            height: 30px;
-            background: pink;
-            border-radius: 50%;
-        }
-
-        .heart::before {
-            top: -15px;
-            left: 0;
-        }
-
-        .heart::after {
-            left: 15px;
-            top: 0;
-        }
-
-        @keyframes float {
-            0% { transform: scale(1) rotate(-45deg); opacity: 1; }
-            100% { transform: scale(1.5) translateY(-100px) rotate(-45deg); opacity: 0; }
+        @keyframes floatEmoji {
+            0% { transform: scale(1) translateY(0); opacity: 1; }
+            100% { transform: scale(1.5) translateY(-120px); opacity: 0; }
         }
     </style>
 </head>
 <body>
     <h1>Hearts and Memories</h1>
 
-    <p>Baby. I still remember the first time I saw you lol. I honestly thought you were a terror and even a professor. But later, I started catching feels for you...... your vibe, your kindness, that cute smile and the way you play the keyboard...... I lowkey admired you so much. Every Saturday I used to get a chance of seeing you in the name of practice...... and I fell for you. I was waiting for the opportunity to talk to you, but I didn’t get a chance at all...... then I saw your Insta in the suggestions and started texting you every day...... slowly, I started noticing everything about you...... the way you care for people, the way you pray, the way you live your faith. And then, you were like why are we even texting...... we had some arguments and stuff...... but I just couldn’t forget you...... the more you said no, the stronger my feelings got day by day...... I had never felt love before, it was my first time loving someone...... I never thought I would get such feelings ever in my life.</p>
+    <p>Baby. I still remember the first time I saw you lol...... I honestly thought you were a terror and even a professor...... but later, I started catching feels for you...... your vibe, your kindness, that cute smile and the way you play the keyboard...... I lowkey admired you so much.</p>
+
+    <p>Every Saturday I used to get a chance of seeing you in the name of practice...... and I fell for you...... I was waiting for the opportunity to talk to you, but I didn’t get a chance at all...... then I saw your Insta in the suggestions and started texting you every day...... slowly, I started noticing everything about you...... the way you care for people, the way you pray, the way you live your faith.</p>
+
+    <p>And then, you were like why are we even texting...... we had some arguments and stuff...... but I just couldn’t forget you...... the more you said no, the stronger my feelings got day by day...... I had never felt love before, it was my first time loving someone...... I never thought I would get such feelings ever in my life.</p>
 
     <p>Then I had to tell you my feelings...... we had fights and arguments, but we left that and continued our talks and texts...... then you asked me about it again...... I stayed strong, and when you said let’s stop texting, I felt like everything had finished...... but I didn’t lose hope...... I made up my mind and stood still...... I even fought with your sis and had arguments, but still...... I kept believing...... I prayed every day with God to have you, and finally...... God answered my prayers...... now see us...... from all the chaos, confusion, fights, and waiting...... here we are, together, stronger than ever...... hand in hand, heart to heart, growing in love and faith...... living the blessing that God gave me.</p>
 
     <p>I want us to love each other more...... want to overcome the battles and struggles...... and live a Christ-centered life...... submitting ourselves fully to God’s ministry...... walking together in faith...... and making our love a reflection of His blessings.</p>
 
 <script>
-function createHeart() {
-    const heart = document.createElement('div');
-    heart.className = 'heart';
-    const x = Math.random() * (window.innerWidth - 50);
-    const y = Math.random() * (window.innerHeight - 50);
-    heart.style.left = x + 'px';
-    heart.style.top = y + 'px';
-    document.body.appendChild(heart);
-    setTimeout(() => heart.remove(), 1000);
-}
+    const emojis = ["❤️", "😘", "🫂"]; // emojis to float
 
-// create a heart every 800ms
-setInterval(createHeart, 800);
+    function createEmoji() {
+        const emoji = document.createElement('div');
+        emoji.className = 'emoji';
+        emoji.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+
+        const x = Math.random() * (window.innerWidth - 50);
+        const y = Math.random() * (window.innerHeight - 50);
+        emoji.style.left = x + 'px';
+        emoji.style.top = y + 'px';
+
+        document.body.appendChild(emoji);
+
+        setTimeout(() => emoji.remove(), 1500); // remove after floating
+    }
+
+    setInterval(createEmoji, 800); // every 0.8 sec
 </script>
 </body>
 </html>
