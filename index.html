@@ -24,7 +24,6 @@
             margin-bottom: 20px;
         }
 
-        /* Emoji Styles */
         .emoji {
             position: absolute;
             font-size: 30px;
@@ -39,7 +38,20 @@
         }
     </style>
 </head>
+
 <body>
+
+    <!-- 🎶 MUSIC -->
+    <audio id="bg-music" loop>
+        <source src="Bass Backing Track No Bass - Die With A Smile - Lady Gaga Bruno Mars.mp3" type="audio/mpeg">
+    </audio>
+
+    <script>
+    document.addEventListener("click", function () {
+        document.getElementById("bg-music").play();
+    });
+    </script>
+
     <h1>Hearts and Memories</h1>
 
     <p>Baby. I still remember the first time I saw you lol...... I honestly thought you were a terror and even a professor...... but later, I started catching feels for you...... your vibe, your kindness, that cute smile and the way you play the keyboard...... I lowkey admired you so much.</p>
@@ -52,8 +64,8 @@
 
     <p>I want us to love each other more...... want to overcome the battles and struggles...... and live a Christ-centered life...... submitting ourselves fully to God’s ministry...... walking together in faith...... and making our love a reflection of His blessings.</p>
 
-<script>
-    const emojis = ["❤️", "😘", "🫂"]; // emojis to float
+    <script>
+    const emojis = ["❤️", "😘", "🫂"];
 
     function createEmoji() {
         const emoji = document.createElement('div');
@@ -67,10 +79,11 @@
 
         document.body.appendChild(emoji);
 
-        setTimeout(() => emoji.remove(), 1500); // remove after floating
+        setTimeout(() => emoji.remove(), 1500);
     }
 
-    setInterval(createEmoji, 800); // every 0.8 sec
-</script>
+    setInterval(createEmoji, 800);
+    </script>
+
 </body>
 </html>
