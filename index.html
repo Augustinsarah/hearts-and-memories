@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Hearts and Memories</title>
+
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -18,6 +19,7 @@
 
         h1 {
             color: #a83279;
+            text-align: center;
         }
 
         p {
@@ -41,14 +43,21 @@
 
 <body>
 
+    <!-- 💗 TAP MESSAGE -->
+    <p style="text-align:center; font-weight:bold; color:#a83279;">
+        💗 Tap anywhere once… and enter my world 💗
+    </p>
+
     <!-- 🎶 MUSIC -->
     <audio id="bg-music" loop>
         <source src="Bass Backing Track No Bass - Die With A Smile - Lady Gaga Bruno Mars.mp3" type="audio/mpeg">
     </audio>
 
     <script>
-    document.addEventListener("click", function () {
-        document.getElementById("bg-music").play();
+    document.addEventListener("click", function playMusicOnce() {
+        const music = document.getElementById("bg-music");
+        music.play();
+        document.removeEventListener("click", playMusicOnce);
     });
     </script>
 
@@ -64,6 +73,7 @@
 
     <p>I want us to love each other more...... want to overcome the battles and struggles...... and live a Christ-centered life...... submitting ourselves fully to God’s ministry...... walking together in faith...... and making our love a reflection of His blessings.</p>
 
+    <!-- ❤️ 😘 🫂 FLOATING EMOJIS -->
     <script>
     const emojis = ["❤️", "😘", "🫂"];
 
