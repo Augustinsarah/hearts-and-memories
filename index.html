@@ -6,7 +6,7 @@
 
 <style>
 body {
-    font-family: Arial;
+    font-family: Arial, sans-serif;
     background-color: #fdf6f0;
     max-width: 700px;
     margin: auto;
@@ -15,17 +15,20 @@ body {
     z-index: 1;
 }
 
+/* Title */
 h1 {
     color: #a83279;
     text-align: center;
 }
 
+/* Paragraphs */
 p {
     margin-bottom: 20px;
     position: relative;
     z-index: 2;
 }
 
+/* Music Button */
 button {
     background-color: #ff4d88;
     color: white;
@@ -38,7 +41,7 @@ button {
     z-index: 3;
 }
 
-/* 💖 FULL SCREEN PHOTO */
+/* 🌅 Full screen photos */
 .photo {
     position: fixed;
     top: 0;
@@ -50,11 +53,22 @@ button {
     transition: opacity 2s ease;
     z-index: 0;
     pointer-events: none;
-    filter: brightness(0.6) blur(2px);
 }
 
+/* Make text readable over photo */
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(253, 246, 240, 0.6); /* light overlay, text visible */
+    z-index: 1;
+}
+
+/* Show photo */
 .show {
-    opacity: 0.3;
+    opacity: 1;
 }
 
 /* ❤️ EMOJIS */
@@ -82,6 +96,14 @@ button {
 
 <button onclick="start()">💗 Play Our Song</button>
 
+<!-- 🌅 PHOTOS -->
+<img src="pic1.jpg" class="photo" id="p1">
+<img src="pic2.jpg" class="photo" id="p2">
+<img src="pic3.jpg" class="photo" id="p3">
+
+<!-- ✨ overlay for readability -->
+<div class="overlay"></div>
+
 <h1>Hearts and Memories</h1>
 
 <p>Baby. I still remember the first time I saw you lol...... I honestly thought you were a terror and even a professor...... but later, I started catching feels for you...... your vibe, your kindness, that cute smile and the way you play the keyboard...... I lowkey admired you so much.</p>
@@ -93,11 +115,6 @@ button {
 <p>Then I had to tell you my feelings...... we had fights and arguments, but we left that and continued our talks and texts...... then you asked me about it again...... I stayed strong, and when you said let’s stop texting, I felt like everything had finished...... but I didn’t lose hope...... I made up my mind and stood still...... I even fought with your sis and had arguments, but still...... I kept believing...... I prayed every day with God to have you, and finally...... God answered my prayers...... now see us...... from all the chaos, confusion, fights, and waiting...... here we are, together, stronger than ever...... hand in hand, heart to heart, growing in love and faith...... living the blessing that God gave me.</p>
 
 <p>I want us to love each other more...... want to overcome the battles and struggles...... and live a Christ-centered life...... submitting ourselves fully to God’s ministry...... walking together in faith...... and making our love a reflection of His blessings.</p>
-
-<!-- 🖼️ PHOTOS -->
-<img src="pic1.jpg" class="photo" id="p1">
-<img src="pic2.jpg" class="photo" id="p2">
-<img src="pic3.jpg" class="photo" id="p3">
 
 <script>
 function start() {
@@ -129,7 +146,6 @@ function createEmoji() {
     emoji.style.top = y + 'px';
 
     document.body.appendChild(emoji);
-
     setTimeout(() => emoji.remove(), 1500);
 }
 
