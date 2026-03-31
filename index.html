@@ -69,7 +69,13 @@
     <script>
     function playMusic() {
         const music = document.getElementById("bg-music");
-        music.play();
+        music.volume = 1;
+        music.currentTime = 0;
+        music.play().then(() => {
+            console.log("Playing");
+        }).catch((e) => {
+            alert("Tap again to play 💗");
+        });
     }
     </script>
 
