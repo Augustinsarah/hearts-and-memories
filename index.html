@@ -41,7 +41,7 @@ button {
     z-index: 3;
 }
 
-/* 🌅 Full screen photos */
+/* Full screen photos behind text */
 .photo {
     position: fixed;
     top: 0;
@@ -55,20 +55,20 @@ button {
     pointer-events: none;
 }
 
-/* Make text readable over photo */
+/* Overlay to make text readable */
 .overlay {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(253, 246, 240, 0.6); /* light overlay, text visible */
+    background-color: rgba(253, 246, 240, 0.8); /* more see-through background */
     z-index: 1;
 }
 
 /* Show photo */
 .show {
-    opacity: 1;
+    opacity: 0.25; /* more transparent */
 }
 
 /* ❤️ EMOJIS */
@@ -122,14 +122,24 @@ function start() {
 
     const photos = ["p1", "p2", "p3"];
     let i = 0;
+    let repeatCount = 0;
 
-    setInterval(() => {
+    const interval = setInterval(() => {
         document.querySelectorAll(".photo").forEach(p => p.classList.remove("show"));
         document.getElementById(photos[i]).classList.add("show");
 
         i++;
-        if (i >= photos.length) i = 0;
-    }, 8000);
+        if (i >= photos.length) {
+            i = 0;
+            repeatCount++;
+        }
+
+        // Stop after 2 cycles
+        if (repeatCount >= 2) {
+            clearInterval(interval);
+            document.querySelectorAll(".photo").forEach(p => p.classList.remove("show"));
+        }
+    }, 10000); // 10 seconds per photo
 }
 
 /* ❤️ EMOJIS */
