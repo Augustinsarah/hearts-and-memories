@@ -23,7 +23,7 @@ h1 {
 p {
     margin-bottom: 20px;
     position: relative;
-    z-index: 2; /* 👈 TEXT ABOVE IMAGE */
+    z-index: 2;
 }
 
 button {
@@ -34,26 +34,27 @@ button {
     border-radius: 20px;
     margin-bottom: 20px;
     cursor: pointer;
-    z-index: 3;
     position: relative;
+    z-index: 3;
 }
 
-/* 💖 PHOTO (BEHIND TEXT) */
+/* 💖 FULL SCREEN PHOTO */
 .photo {
     position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 260px;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    object-fit: cover;
     opacity: 0;
     transition: opacity 2s ease;
-    z-index: 0; /* 👈 BEHIND TEXT */
+    z-index: 0;
     pointer-events: none;
-    filter: brightness(0.9) blur(1px); /* 👈 SOFT LOOK */
+    filter: brightness(0.6) blur(2px);
 }
 
 .show {
-    opacity: 0.25; /* 👈 LIGHT SO TEXT IS CLEAR */
+    opacity: 0.3;
 }
 
 /* ❤️ EMOJIS */
@@ -83,7 +84,6 @@ button {
 
 <h1>Hearts and Memories</h1>
 
-<!-- 💌 YOUR TEXT -->
 <p>Baby. I still remember the first time I saw you lol...... I honestly thought you were a terror and even a professor...... but later, I started catching feels for you...... your vibe, your kindness, that cute smile and the way you play the keyboard...... I lowkey admired you so much.</p>
 
 <p>Every Saturday I used to get a chance of seeing you in the name of practice...... and I fell for you...... I was waiting for the opportunity to talk to you, but I didn’t get a chance at all...... then I saw your Insta in the suggestions and started texting you every day...... slowly, I started noticing everything about you...... the way you care for people, the way you pray, the way you live your faith.</p>
@@ -108,14 +108,10 @@ function start() {
 
     setInterval(() => {
         document.querySelectorAll(".photo").forEach(p => p.classList.remove("show"));
-
-        // 👇 ALWAYS IN ORDER 1 → 2 → 3
         document.getElementById(photos[i]).classList.add("show");
 
         i++;
-        if (i >= photos.length) {
-            i = 0;
-        }
+        if (i >= photos.length) i = 0;
     }, 8000);
 }
 
@@ -127,8 +123,8 @@ function createEmoji() {
     emoji.className = 'emoji';
     emoji.textContent = emojis[Math.floor(Math.random() * emojis.length)];
 
-    const x = Math.random() * (window.innerWidth - 50);
-    const y = Math.random() * (window.innerHeight - 50);
+    const x = Math.random() * window.innerWidth;
+    const y = Math.random() * window.innerHeight;
     emoji.style.left = x + 'px';
     emoji.style.top = y + 'px';
 
