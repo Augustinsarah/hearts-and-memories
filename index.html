@@ -3,7 +3,6 @@
 <head>
 <meta charset="UTF-8">
 <title>Hearts and Memories</title>
-
 <style>
 body {
     font-family: Arial, sans-serif;
@@ -19,13 +18,15 @@ body {
 h1 {
     color: #a83279;
     text-align: center;
+    position: relative;
+    z-index: 3;
 }
 
 /* Paragraphs */
 p {
     margin-bottom: 20px;
     position: relative;
-    z-index: 2;
+    z-index: 3;
 }
 
 /* Music Button */
@@ -41,34 +42,23 @@ button {
     z-index: 3;
 }
 
-/* Full screen photos behind text */
+/* Photos appear on top of text */
 .photo {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    object-fit: cover;
-    opacity: 0;
-    transition: opacity 2s ease;
-    z-index: 0;
-    pointer-events: none;
-}
-
-/* Overlay to make text readable */
-.overlay {
     position: absolute;
     top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(253, 246, 240, 0.8); /* more see-through background */
-    z-index: 1;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    max-width: 700px;
+    opacity: 0;
+    transition: opacity 2s ease;
+    z-index: 2;
+    pointer-events: none;
 }
 
 /* Show photo */
 .show {
-    opacity: 0.25; /* more transparent */
+    opacity: 0.4; /* more see-through */
 }
 
 /* ❤️ EMOJIS */
@@ -86,23 +76,18 @@ button {
 }
 </style>
 </head>
-
 <body>
 
 <!-- 🎶 MUSIC -->
 <audio id="bg-music" loop>
     <source src="DWAS-mp3.mp3" type="audio/mpeg">
 </audio>
-
 <button onclick="start()">💗 Play Our Song</button>
 
 <!-- 🌅 PHOTOS -->
 <img src="pic1.jpg" class="photo" id="p1">
 <img src="pic2.jpg" class="photo" id="p2">
 <img src="pic3.jpg" class="photo" id="p3">
-
-<!-- ✨ overlay for readability -->
-<div class="overlay"></div>
 
 <h1>Hearts and Memories</h1>
 
@@ -120,7 +105,7 @@ button {
 function start() {
     document.getElementById("bg-music").play();
 
-    const photos = ["p1", "p2", "p3"];
+    const photos = ["p1","p2","p3"];
     let i = 0;
     let repeatCount = 0;
 
@@ -129,13 +114,12 @@ function start() {
         document.getElementById(photos[i]).classList.add("show");
 
         i++;
-        if (i >= photos.length) {
+        if(i >= photos.length){
             i = 0;
             repeatCount++;
         }
 
-        // Stop after 2 cycles
-        if (repeatCount >= 2) {
+        if(repeatCount >= 2){ // stop after 2 cycles
             clearInterval(interval);
             document.querySelectorAll(".photo").forEach(p => p.classList.remove("show"));
         }
@@ -143,23 +127,19 @@ function start() {
 }
 
 /* ❤️ EMOJIS */
-const emojis = ["❤️", "😘", "🫂"];
-
-function createEmoji() {
+const emojis = ["❤️","😘","🫂"];
+function createEmoji(){
     const emoji = document.createElement('div');
-    emoji.className = 'emoji';
-    emoji.textContent = emojis[Math.floor(Math.random() * emojis.length)];
-
-    const x = Math.random() * window.innerWidth;
-    const y = Math.random() * window.innerHeight;
-    emoji.style.left = x + 'px';
-    emoji.style.top = y + 'px';
-
+    emoji.className='emoji';
+    emoji.textContent=emojis[Math.floor(Math.random()*emojis.length)];
+    const x=Math.random()*window.innerWidth;
+    const y=Math.random()*window.innerHeight;
+    emoji.style.left=x+'px';
+    emoji.style.top=y+'px';
     document.body.appendChild(emoji);
-    setTimeout(() => emoji.remove(), 1500);
+    setTimeout(()=>emoji.remove(),1500);
 }
-
-setInterval(createEmoji, 800);
+setInterval(createEmoji,800);
 </script>
 
 </body>
