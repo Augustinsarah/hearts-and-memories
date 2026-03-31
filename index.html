@@ -4,90 +4,75 @@
 <meta charset="UTF-8">
 <title>Hearts and Memories</title>
 <style>
-body {
-    font-family: Arial, sans-serif;
-    background-color: #fdf6f0;
-    max-width: 700px;
-    margin: auto;
+  /* Full-screen body with no extra page */
+  body {
+    margin: 0;
     padding: 20px;
+    font-family: Arial, sans-serif;
+    color: #333;
+    overflow-x: hidden;
     position: relative;
-    z-index: 1;
-}
+    background: #fdf6f0; /* just in case, can remove if you want pure transparent */
+  }
 
-/* Title */
-h1 {
+  h1 {
     color: #a83279;
     text-align: center;
-    position: relative;
-    z-index: 3;
-}
+  }
 
-/* Paragraphs */
-p {
-    margin-bottom: 20px;
-    position: relative;
-    z-index: 3;
-}
-
-/* Music Button */
-button {
-    background-color: #ff4d88;
-    color: white;
-    padding: 10px;
-    border: none;
-    border-radius: 20px;
-    margin-bottom: 20px;
-    cursor: pointer;
-    position: relative;
-    z-index: 3;
-}
-
-/* Photos appear on top of text */
-.photo {
-    position: absolute;
-    top: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 90%;
-    max-width: 700px;
-    opacity: 0;
-    transition: opacity 2s ease;
+  p {
+    font-size: 18px;
+    line-height: 1.6;
     z-index: 2;
-    pointer-events: none;
-}
+    position: relative;
+  }
 
-/* Show photo */
-.show {
-    opacity: 0.4; /* more see-through */
-}
+  /* Photo overlay */
+  .photo-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    opacity: 0.5; /* 50% see-through */
+    z-index: 1;
+    transition: background-image 1s ease-in-out;
+  }
 
-/* ❤️ EMOJIS */
-.emoji {
+  /* Emojis floating */
+  .emoji {
     position: absolute;
     font-size: 30px;
     animation: floatEmoji 1.5s ease-out forwards;
-    z-index: 9999;
+    z-index: 3;
     pointer-events: none;
-}
+  }
 
-@keyframes floatEmoji {
+  @keyframes floatEmoji {
     0% { transform: scale(1) translateY(0); opacity: 1; }
     100% { transform: scale(1.5) translateY(-120px); opacity: 0; }
-}
+  }
 </style>
 </head>
+
 <body>
 
-<!-- 🎶 MUSIC -->
+<!-- Music -->
 <audio id="bg-music" loop>
-    <source src="DWAS-mp3.mp3" type="audio/mpeg">
+  <source src="DWAS-mp3.mp3" type="audio/mpeg">
 </audio>
-<button onclick="start()">💗 Play Our Song</button>
 
-<!-- 🌅 PHOTOS -->
-<img src="pic1.jpg" class="photo" id="p1">
-<img src="pic2.jpg" class="photo" id="p2">
-<img src="pic3.jpg" class="photo" id="p3">
+<script>
+  // Play music once
+  document.addEventListener("click", function () {
+    document.getElementById("bg-music").play();
+  });
+</script>
+
+<!-- Photo overlay -->
+<div class="photo-overlay" id="photoOverlay"></div>
 
 <h1>Hearts and Memories</h1>
 
@@ -102,44 +87,43 @@ button {
 <p>I want us to love each other more...... want to overcome the battles and struggles...... and live a Christ-centered life...... submitting ourselves fully to God’s ministry...... walking together in faith...... and making our love a reflection of His blessings.</p>
 
 <script>
-function start() {
-    document.getElementById("bg-music").play();
-
-    const photos = ["p1","p2","p3"];
-    let i = 0;
-    let repeatCount = 0;
-
-    const interval = setInterval(() => {
-        document.querySelectorAll(".photo").forEach(p => p.classList.remove("show"));
-        document.getElementById(photos[i]).classList.add("show");
-
-        i++;
-        if(i >= photos.length){
-            i = 0;
-            repeatCount++;
-        }
-
-        if(repeatCount >= 2){ // stop after 2 cycles
-            clearInterval(interval);
-            document.querySelectorAll(".photo").forEach(p => p.classList.remove("show"));
-        }
-    }, 10000); // 10 seconds per photo
-}
-
-/* ❤️ EMOJIS */
-const emojis = ["❤️","😘","🫂"];
-function createEmoji(){
+  // Emoji floating
+  const emojis = ["❤️", "😘", "🫂"];
+  function createEmoji() {
     const emoji = document.createElement('div');
-    emoji.className='emoji';
-    emoji.textContent=emojis[Math.floor(Math.random()*emojis.length)];
-    const x=Math.random()*window.innerWidth;
-    const y=Math.random()*window.innerHeight;
-    emoji.style.left=x+'px';
-    emoji.style.top=y+'px';
+    emoji.className = 'emoji';
+    emoji.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+    emoji.style.left = Math.random() * (window.innerWidth - 50) + 'px';
+    emoji.style.top = Math.random() * (window.innerHeight - 50) + 'px';
     document.body.appendChild(emoji);
-    setTimeout(()=>emoji.remove(),1500);
-}
-setInterval(createEmoji,800);
+    setTimeout(() => emoji.remove(), 1500);
+  }
+  setInterval(createEmoji, 800);
+
+  // Photo slideshow
+  const photos = [
+    'photo1.jpg', // replace with your first pic
+    'photo2.jpg', // second pic
+    'photo3.jpg'  // third pic
+  ];
+  const overlay = document.getElementById('photoOverlay');
+  let index = 0;
+  let repeat = 0;
+
+  function changePhoto() {
+    overlay.style.backgroundImage = `url('${photos[index]}')`;
+    index++;
+    if(index >= photos.length) {
+      index = 0;
+      repeat++;
+      if(repeat >= 2) { // repeat 2 times
+        clearInterval(slideshow);
+      }
+    }
+  }
+
+  changePhoto(); // initial
+  const slideshow = setInterval(changePhoto, 10000); // 10 seconds each
 </script>
 
 </body>
