@@ -4,7 +4,6 @@
 <meta charset="UTF-8">
 <title>Hearts and Memories</title>
 <style>
-  /* Full-screen body with no extra page */
   body {
     margin: 0;
     padding: 20px;
@@ -12,7 +11,7 @@
     color: #333;
     overflow-x: hidden;
     position: relative;
-    background: #fdf6f0; /* just in case, can remove if you want pure transparent */
+    background: none; /* no page background */
   }
 
   h1 {
@@ -41,7 +40,7 @@
     transition: background-image 1s ease-in-out;
   }
 
-  /* Emojis floating */
+  /* Emoji floating */
   .emoji {
     position: absolute;
     font-size: 30px;
@@ -56,7 +55,6 @@
   }
 </style>
 </head>
-
 <body>
 
 <!-- Music -->
@@ -65,7 +63,6 @@
 </audio>
 
 <script>
-  // Play music once
   document.addEventListener("click", function () {
     document.getElementById("bg-music").play();
   });
@@ -100,11 +97,11 @@
   }
   setInterval(createEmoji, 800);
 
-  // Photo slideshow
+  // Photo slideshow in order 2 → 1 → 3
   const photos = [
-    'photo1.jpg', // replace with your first pic
-    'photo2.jpg', // second pic
-    'photo3.jpg'  // third pic
+    'photo2.jpg', // second pic first
+    'photo1.jpg', // first pic second
+    'photo3.jpg'  // third pic third
   ];
   const overlay = document.getElementById('photoOverlay');
   let index = 0;
