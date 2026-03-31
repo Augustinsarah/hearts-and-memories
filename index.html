@@ -15,14 +15,26 @@
             line-height: 1.6;
             position: relative;
             overflow: hidden;
+            text-align: center;
         }
 
         h1 {
             color: #a83279;
-            text-align: center;
         }
 
         p {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        button {
+            background-color: #ff4d88;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            font-size: 16px;
+            border-radius: 20px;
+            cursor: pointer;
             margin-bottom: 20px;
         }
 
@@ -48,12 +60,14 @@
         <source src="DWAS-mp3.mp3" type="audio/mpeg">
     </audio>
 
+    <!-- 💗 BUTTON -->
+    <button onclick="playMusic()">💗 Play Our Song</button>
+
     <script>
-    document.addEventListener("click", function playMusicOnce() {
+    function playMusic() {
         const music = document.getElementById("bg-music");
         music.play();
-        document.removeEventListener("click", playMusicOnce);
-    });
+    }
     </script>
 
     <h1>Hearts and Memories</h1>
